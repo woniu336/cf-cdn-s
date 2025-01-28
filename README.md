@@ -62,14 +62,40 @@ sudo apt update
 sudo apt install haproxy -y
 ```
 
-编辑配置文件
+备份，避免出错
 
 ```
-curl -sS -o /etc/haproxy/haproxy.cfg https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/haproxy.cfg
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
 ```
 
-粘贴以下内容，修改成自己的ip
+
+编辑配置文件，修改成自己的ip
 
 ```
-nano /etc/haproxy/haproxy.cfg
+sudo curl -sS -o /etc/haproxy/haproxy.cfg https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/haproxy.cfg
 ```
+
+替换1.1.1.1成自己ip
+
+```
+sudo sed -i 's/8\.8\.8\.8/1.1.1.1/g' /etc/haproxy/haproxy.cfg
+```
+
+检测
+
+```
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+```
+
+Configuration file is valid 有效
+
+
+重启 HAProxy 服务以使更改生效
+
+```
+sudo systemctl restart haproxy
+```
+
+
+
+
