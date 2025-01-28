@@ -1,5 +1,7 @@
 ## 一键脚本
 
+在反代服务器上操作
+
 ```
 curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/cf-cdn-s.sh && chmod +x cf-cdn-s.sh && ./cf-cdn-s.sh
 ```
@@ -8,6 +10,9 @@ curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/cf-cdn-s.sh
 
 
 ## 证书申请细节
+
+在反代服务器上操作
+
 
 > 如果你全部的域名只托管在一个cloudflare账号中，使用以下命令
 
@@ -54,6 +59,9 @@ chmod 600 /root/.secrets/*.ini
 ```
 
 ## haproxy安装
+
+
+在转发服务器上操作
 
 
 一键脚本
@@ -106,5 +114,36 @@ sudo systemctl restart haproxy
 ```
 
 
+## 获取客户端ip
 
+
+编辑站点配置文件
+
+```
+nano /etc/nginx/nginx.conf
+```
+
+在末尾添加以下内容：
+
+```
+    # proxy_protocol 全局配置
+    set_real_ip_from 转发ip;
+    #set_real_ip_from 转发ip2;
+    real_ip_header proxy_protocol;
+    
+    # 为所有 HTTPS 端口配置 proxy_protocol
+    server {
+        listen 443 ssl proxy_protocol;
+        return 444;
+    }
+
+    include /etc/nginx/conf.d/*.conf;
+```
+
+重启nginx
+
+```
+nginx -t
+systemctl restart nginx
+```
 
