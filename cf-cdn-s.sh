@@ -57,9 +57,9 @@ apply_cert() {
     local domain=$1
     
     echo -e "${BLUE}开始申请证书...${NC}"
-    curl -sS -O https://raw.githubusercontent.com/woniu336/open_shell/main/certbot-ssl-s.sh
-    chmod +x certbot-ssl.sh
-    ./certbot-ssl.sh "$domain"
+    curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/certbot-ssl-s.sh
+    chmod +x certbot-ssl-s.sh
+    ./certbot-ssl-s.sh "$domain"
 }
 
 # 复制证书
