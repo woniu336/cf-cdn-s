@@ -55,6 +55,15 @@ chmod 600 /root/.secrets/*.ini
 
 ## haproxy安装
 
+
+一键脚本
+
+
+```
+curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/setup_haproxy.sh && chmod +x setup_haproxy.sh && ./setup_haproxy.sh
+```
+
+
 > 端口转发，使用haproxy
 
 ```
