@@ -57,7 +57,9 @@ apply_cert() {
     local domain=$1
     
     echo -e "${BLUE}开始申请证书...${NC}"
-    certbot certonly -d "$domain" --manual --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory
+    curl -sS -O https://raw.githubusercontent.com/woniu336/open_shell/main/certbot-ssl-s.sh
+    chmod +x certbot-ssl.sh
+    ./certbot-ssl.sh "$domain"
 }
 
 # 复制证书
