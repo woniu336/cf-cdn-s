@@ -180,3 +180,8 @@ nginx -t
 systemctl restart nginx
 ```
 
+## Nginx文件备份
+
+```
+curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/backup-nginx-ssl.sh && chmod +x backup-nginx-ssl.sh && ./backup-nginx-ssl.sh
+```
