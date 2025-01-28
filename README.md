@@ -117,6 +117,14 @@ sudo systemctl restart haproxy
 ## 获取客户端ip
 
 
+一键脚本
+
+
+```
+curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/update_nginx.sh && chmod +x update_nginx.sh && ./update_nginx.sh
+```
+
+
 编辑站点配置文件
 
 ```
