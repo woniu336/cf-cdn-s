@@ -72,6 +72,8 @@ curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/setup_hapro
 ```
 
 
+
+> 以下是手动配置
 > 端口转发，使用haproxy
 
 ```
@@ -123,6 +125,29 @@ sudo systemctl restart haproxy
 ```
 curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/update_nginx.sh && chmod +x update_nginx.sh && ./update_nginx.sh
 ```
+
+
+查看nginx配置
+
+```
+cat /etc/nginx/nginx.conf
+```
+
+移除转发ip，例如 2.2.2.2
+
+```
+sudo sed -i "/set_real_ip_from 2.2.2.2;/d" /etc/nginx/nginx.conf
+```
+
+重启
+
+```
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+
+> 以下是手动配置
 
 
 编辑站点配置文件
