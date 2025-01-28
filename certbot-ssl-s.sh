@@ -147,14 +147,14 @@ setup_cert_renewal() {
     check_crontab_installed
     
     # 下载自动续期脚本
-    if [ ! -f "auto_cert_renewal.sh" ]; then
+    if [ ! -f "auto_cert_renewal-s.sh" ]; then
         echo -e "${YELLOW}正在下载证书续期脚本...${NC}"
         curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/auto_cert_renewal-s.sh
-        chmod +x auto_cert_renewal.sh
+        chmod +x auto_cert_renewal-s.sh
     fi
 
     # 添加定时任务（每天凌晨3点5分执行）
-    local cron_job="5 3 * * * $(pwd)/auto_cert_renewal.sh"
+    local cron_job="5 3 * * * $(pwd)/auto_cert_renewal-s.sh"
     if ! (crontab -l 2>/dev/null | grep -Fq "$cron_job"); then
         (crontab -l 2>/dev/null; echo "$cron_job") | crontab -
         echo -e "${GREEN}证书自动续期任务已添加${NC}"
