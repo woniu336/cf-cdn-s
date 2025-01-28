@@ -187,9 +187,9 @@ show_menu() {
             download_config_files
             ;;
         4)
-            read -p "请输入域名: " domain
-            apply_cert "$domain"
-            copy_certs "$domain"
+            curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/certbot-ssl-s.sh
+            chmod +x certbot-ssl-s.sh
+            ./certbot-ssl-s.sh
             ;;
         5)
             read -p "请输入域名: " domain
