@@ -93,10 +93,10 @@ sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 sudo systemctl restart haproxy
 ```
 
-## Nginx 配置
+## 获取真实IP
 
 ### 快速配置
-执行一键配置脚本：
+在反代服务器上执行：
 ```bash
 curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/update_nginx.sh && chmod +x update_nginx.sh && ./update_nginx.sh
 ```
@@ -116,7 +116,7 @@ sudo nginx -t && sudo systemctl restart nginx
 ## 备份和还原
 
 ### 备份
-执行备份脚本：
+在反代服务器上执行：
 ```bash
 curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/backup-nginx-ssl.sh && chmod +x backup-nginx-ssl.sh && ./backup-nginx-ssl.sh
 ```
