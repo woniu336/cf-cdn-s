@@ -29,3 +29,4 @@ echo "正在重启 Haproxy 服务..."
 sudo systemctl restart haproxy
 
 echo "Haproxy 配置完成并已重启服务。"
+sudo systemctl enable haproxy
