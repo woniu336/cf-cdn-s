@@ -74,7 +74,7 @@ for cert_dir in $certs_directory*; do
             --non-interactive \
             --key-type ecdsa \
             --force-renewal \
-            --dns-cloudflare-propagation-seconds 30
+            --dns-cloudflare-propagation-seconds 60
 
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}证书续签成功${NC}"

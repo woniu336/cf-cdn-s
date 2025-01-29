@@ -198,7 +198,7 @@ install_ssltls() {
         --non-interactive \
         --key-type ecdsa \
         --force-renewal \
-        --dns-cloudflare-propagation-seconds 30 \
+        --dns-cloudflare-propagation-seconds 60 \
         2>&1 | tee /tmp/certbot.log
         
     if [ $? -eq 0 ]; then
