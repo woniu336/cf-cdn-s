@@ -62,6 +62,28 @@ dns_cloudflare_api_token = cloudflare_api_token
 chmod 600 /root/.secrets/*.ini
 ```
 
+## 获取真实IP
+
+### 快速配置
+在反代服务器上执行：
+```bash
+curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/update_nginx.sh && chmod +x update_nginx.sh && ./update_nginx.sh
+```
+
+### 管理转发 IP
+```bash
+# 查看配置
+cat /etc/nginx/nginx.conf
+
+# 移除特定转发 IP
+sudo sed -i "/set_real_ip_from 具体IP;/d" /etc/nginx/nginx.conf
+
+# 重启 Nginx
+sudo nginx -t && sudo systemctl restart nginx
+```
+
+
+
 ## HAProxy 配置
 
 ### 快速安装
@@ -91,26 +113,6 @@ sudo sed -i 's/8\.8\.8\.8/你的IP/g' /etc/haproxy/haproxy.cfg
 ```bash
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 sudo systemctl restart haproxy
-```
-
-## 获取真实IP
-
-### 快速配置
-在反代服务器上执行：
-```bash
-curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/update_nginx.sh && chmod +x update_nginx.sh && ./update_nginx.sh
-```
-
-### 管理转发 IP
-```bash
-# 查看配置
-cat /etc/nginx/nginx.conf
-
-# 移除特定转发 IP
-sudo sed -i "/set_real_ip_from 具体IP;/d" /etc/nginx/nginx.conf
-
-# 重启 Nginx
-sudo nginx -t && sudo systemctl restart nginx
 ```
 
 ## 备份和还原
