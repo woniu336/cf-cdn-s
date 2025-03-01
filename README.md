@@ -79,6 +79,18 @@ python3 update_cloudflare_ips.py
 (crontab -l ; echo "0 0 */15 * * python3 update_cloudflare_ips.py >/dev/null 2>&1") | crontab -
 ```
 
+RPS分析
+
+```
+wget https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/analyze_rps.py
+```
+
+检测
+
+```
+python3 analyze_rps.py /data/wwwlogs/111.com.access.log
+```
+
 ### 管理转发 IP
 ```bash
 # 查看配置
