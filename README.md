@@ -64,10 +64,19 @@ chmod 600 /root/.secrets/*.ini
 
 ## 获取真实IP
 
-### 快速配置
-在反代服务器上执行：
-```bash
-curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/update_nginx.sh && chmod +x update_nginx.sh && ./update_nginx.sh
+开启了cf cdn如何获取真实ip
+
+```
+pip3 install requests
+wget https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/update_cloudflare_ips.py
+chmod +x update_cloudflare_ips.py
+python3 update_cloudflare_ips.py
+```
+
+定时任务
+
+```
+(crontab -l ; echo "0 0 */15 * * python3 update_cloudflare_ips.py >/dev/null 2>&1") | crontab -
 ```
 
 ### 管理转发 IP
