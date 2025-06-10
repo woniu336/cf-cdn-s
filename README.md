@@ -129,21 +129,30 @@ curl -sS -O https://raw.githubusercontent.com/woniu336/cf-cdn-s/main/backup-ngin
 
 ### 还原步骤
 1. 将备份文件复制到目标服务器
-2. 解压备份：
+
+2. 创建所有必要目录
+
+```bash
+sudo mkdir -p /tmp/restore/
+sudo mkdir -p /etc/letsencrypt/
+sudo mkdir -p /etc/nginx/templates/
+```
+
+3. 解压备份：
 ```bash
 tar -xzf backup文件名.tar.gz -C /tmp/restore/
 ```
 
-3. 还原文件：
+4. 还原文件：
 ```bash
-sudo cp -r /tmp/restore/letsencrypt/* /etc/letsencrypt/
-sudo cp -r /tmp/restore/nginx/conf.d/* /etc/nginx/conf.d/
-sudo cp -r /tmp/restore/nginx/certs/* /etc/nginx/certs/
-sudo cp -r /tmp/restore/nginx/templates/* /etc/nginx/templates/
+sudo cp -a /tmp/restore/letsencrypt/. /etc/letsencrypt/
+sudo cp -a /tmp/restore/nginx/conf.d/. /etc/nginx/conf.d/
+sudo cp -a /tmp/restore/nginx/certs/. /etc/nginx/certs/
+sudo cp -a /tmp/restore/nginx/templates/. /etc/nginx/templates/
 sudo cp /tmp/restore/nginx/nginx.conf /etc/nginx/
 ```
 
-4. 设置权限：
+5. 设置权限：
 ```bash
 sudo chown -R root:root /etc/letsencrypt
 sudo chmod -R 600 /etc/nginx/certs/*
@@ -151,8 +160,9 @@ sudo chmod 644 /etc/nginx/nginx.conf
 sudo chmod -R 644 /etc/nginx/conf.d/*
 ```
 
-5. 重启 Nginx：
+6. 重启 Nginx：
 ```bash
+sudo nginx -t && sudo service nginx reload
 sudo systemctl restart nginx
 ```
 
