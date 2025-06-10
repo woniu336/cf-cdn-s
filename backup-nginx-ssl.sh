@@ -80,24 +80,39 @@ cat > "$BACKUP_DIR/restore_instructions.txt" << EOF
 还原说明：
 
 1. 将备份文件复制到目标服务器
-2. 解压备份文件：
-   tar -xzf $BACKUP_FILE -C /tmp/restore/
 
-3. 还原文件：
-   sudo cp -r /tmp/restore/letsencrypt/* /etc/letsencrypt/
-   sudo cp -r /tmp/restore/nginx/conf.d/* /etc/nginx/conf.d/
-   sudo cp -r /tmp/restore/nginx/certs/* /etc/nginx/certs/
-   sudo cp -r /tmp/restore/nginx/templates/* /etc/nginx/templates/
-   sudo cp /tmp/restore/nginx/nginx.conf /etc/nginx/
 
-4. 设置适当的权限：
-   sudo chown -R root:root /etc/letsencrypt
-   sudo chmod -R 600 /etc/nginx/certs/*
-   sudo chmod 644 /etc/nginx/nginx.conf
-   sudo chmod -R 644 /etc/nginx/conf.d/*
+2. 创建所有必要目录
 
-5. 重启 Nginx：
-   sudo systemctl restart nginx
+sudo mkdir -p /tmp/restore/
+sudo mkdir -p /etc/letsencrypt/
+sudo mkdir -p /etc/nginx/templates/
+
+3. 解压备份文件：
+   
+tar -xzf $BACKUP_FILE -C /tmp/restore/
+
+4. 还原文件：
+   
+sudo cp -a /tmp/restore/letsencrypt/. /etc/letsencrypt/
+sudo cp -a /tmp/restore/nginx/conf.d/. /etc/nginx/conf.d/
+sudo cp -a /tmp/restore/nginx/certs/. /etc/nginx/certs/
+sudo cp -a /tmp/restore/nginx/templates/. /etc/nginx/templates/
+sudo cp /tmp/restore/nginx/nginx.conf /etc/nginx/
+
+
+5. 设置适当的权限：
+
+sudo chown -R root:root /etc/letsencrypt
+sudo chmod -R 600 /etc/nginx/certs/*
+sudo chmod 644 /etc/nginx/nginx.conf
+sudo chmod -R 644 /etc/nginx/conf.d/*
+
+
+6. 重启 Nginx：
+   
+sudo nginx -t && sudo service nginx reload
+sudo systemctl restart nginx
 
 注意：还原前请确保已安装 nginx 并备份原有配置。
 EOF

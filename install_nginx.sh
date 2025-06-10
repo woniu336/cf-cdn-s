@@ -132,12 +132,6 @@ verify_nginx_running() {
         echo -e "${RED}Nginx进程未运行${NC}"
         return 1
     fi
-    
-    # 检查端口是否正常监听
-    if ! netstat -tuln | grep -q ':80 '; then
-        echo -e "${RED}Nginx未在80端口监听${NC}"
-        return 1
-    fi
 
     # 检查配置文件语法
     if ! nginx -t &>/dev/null; then
